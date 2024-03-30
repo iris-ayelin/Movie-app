@@ -2,15 +2,11 @@ let input = document.querySelector('input');
 let btn = document.querySelector('button');
 let p = document.querySelector('p');
 let img = document.querySelector('img');
+const API_KEY = '6ee2fa60';
 
-function loadData() {
-    const API_KEY = '6ee2fa60';
-    fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}&t=${input.value}`)
-    .then(function(response) {
-        return response.json(); 
-    })
-    .then(function(data) {
-        console.log(data);
+async function loadData(){
+    let response = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}&t=${input.value}`);
+    let data = await response.json();
         img.src = data.Poster;
         p.innerText = ''; 
         
@@ -28,5 +24,4 @@ function loadData() {
             newParagraph.innerText = `${paragraphInfo.label}: ${paragraphInfo.content}`;
             p.appendChild(newParagraph);
         });
-    });
-}
+    }
